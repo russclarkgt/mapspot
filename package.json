@@ -1,0 +1,14 @@
+{
+  "name": "mapspot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "author": "Georgia Tech",
+  "license": "MIT"
+}
