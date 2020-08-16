@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Upload Portal</title>
+
+    <!-- favicon and css styling -->
+    <link href="/images/favicon.png" rel="icon" />
+    <link href="/styles/upload.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>MapRoom Upload Portal</h1>
+
+      <form>
+        <!-- mapname input field -->
+        <div class="form-group">
+          <span>Mapname</span>
+          <input type="text"
+            class="form-field"
+            placeholder="My Placeholder Map"
+          />
+        </div>
+
+        <!-- style url input field -->
+        <div class="form-group">
+          <span>Style URL</span>
+          <input type="text"
+            class="form-field"
+            placeholder="mapbox://styles/username/id"
+          />
+        </div>
+
+        <!-- password input field -->
+        <div class="form-group">
+          <span>Password</span>
+          <input type="password"
+            class="form-field"
+            placeholder="••••••••••••••••"
+          />
+        </div>
+
+        <!-- form submission button -->
+        <div id="submission-container">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
