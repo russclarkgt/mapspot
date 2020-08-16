@@ -23,6 +23,24 @@
     <button class="button" id="left" onclick="handleMovement(-5, 0)">&larr;</button>
     <button class="button" id="right" onclick="handleMovement(5, 0)">&rarr;</button>
 
+    <!-- city dropdown selection -->
+    <div class="dropdown" id="city-pos">
+      <select class="dropdown-select" id="cities" onchange="handleCity(event)">
+        <option disabled selected>Select a City</option>
+      </select>
+    </div>
+    
+    <!-- data-layer dropdown selection -->
+    <div class="dropdown" id="filter-pos">
+      <select class="dropdown-select" id="filters">
+        <option disabled selected>Select a Dataset</option>
+      </select>
+    </div>
+
+    <!-- lock & satellite buttons -->
+    <button class="button" id="lock" onclick="handleLock()">🔓 Unlocked</button>
+    <button class="button" id="satellite" onclick="handleSatellite()">🚦 Map View</button>
+
     <!-- controller script -->
     <script type="module" src="/scripts/main.js"></script>
   </body>
