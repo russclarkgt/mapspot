@@ -1,6 +1,44 @@
-/* ===================== */
-/*    GENERAL STYLING    */
-/* ===================== */
+/* ======================== */
+/*      CUSTOM BUTTONS      */
+/* ======================== */
+
+.button {
+  transition: all 0.5s ease;
+  background: #ffffff;
+  color: #404040;
+
+  position: absolute;
+  padding: 0px 10px;
+  min-height: 40px;
+  min-width: 40px;
+
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+}
+.button:hover {
+  filter: brightness(85%);
+  cursor: pointer
+}
+.button:active {
+  filter: brightness(70%);
+}
+
+.mapboxgl-ctrl-group {
+  position: absolute;
+  bottom: 65px;
+  left: 20px;
+}
+
+#up    { bottom: 100px; right: 110px; }
+#left  { bottom: 55px;  right: 155px; }
+#down  { bottom: 55px;  right: 110px; }
+#right { bottom: 55px;  right: 65px;  }
+
+
+/* ========================= */
+/*      GENERAL STYLING      */
+/* ========================= */
 
 #map {
   position: absolute;

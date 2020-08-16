@@ -17,6 +17,12 @@
     <!-- map display -->
     <div id="map"></div>
 
+    <!-- navigation buttons -->
+    <button class="button" id="up" onclick="handleMovement(0, -5)">&uarr;</button>
+    <button class="button" id="down" onclick="handleMovement(0, 5)">&darr;</button>
+    <button class="button" id="left" onclick="handleMovement(-5, 0)">&larr;</button>
+    <button class="button" id="right" onclick="handleMovement(5, 0)">&rarr;</button>
+
     <!-- controller script -->
     <script type="module" src="/scripts/main.js"></script>
   </body>
