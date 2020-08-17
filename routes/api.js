@@ -1,12 +1,13 @@
+const parser = require("body-parser");
 const express = require("express");
 const router = express.Router();
 
-// temporary endpoint @ /api/placeholder
-router.get("/placeholder", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Hello!"
-  });
+// access to .env variables
+require("dotenv").config();
+
+router.post("/addmap", parser.json(), (req, res) => {
+  // todo: add necessary logic
+  res.status(200).end();
 });
 
 module.exports = router;

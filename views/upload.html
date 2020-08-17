@@ -20,6 +20,7 @@
           <input type="text"
             class="form-field"
             placeholder="My Placeholder Map"
+            onchange="handleName(event)"
           />
         </div>
 
@@ -29,6 +30,7 @@
           <input type="text"
             class="form-field"
             placeholder="mapbox://styles/username/id"
+            onchange="handleUrl(event)"
           />
         </div>
 
@@ -38,6 +40,7 @@
           <input type="password"
             class="form-field"
             placeholder="••••••••••••••••"
+            onchange="handlePassword(event)"
           />
         </div>
 
@@ -46,6 +49,9 @@
           <button type="submit">Submit</button>
         </div>
       </form>
+
+      <!-- form state and submission handler -->
+      <script type="text/javascript" src="/scripts/upload.js"></script>
     </div>
   </body>
 </html>
