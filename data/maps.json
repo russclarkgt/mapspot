@@ -1,0 +1,8 @@
+{
+  "Example Map": {
+    "url": "mapbox://styles/username/id",
+    "date": 1596349754210,
+    "approved": false,
+    "active": false
+  }
+}
