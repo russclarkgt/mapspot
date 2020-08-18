@@ -3,10 +3,13 @@ const application = express();
 
 // external routing
 const pageRoutes = require("./routes/pages");
-const apiRoutes = require("./routes/api");
-
 application.use("/", pageRoutes);
-application.use("/api", apiRoutes);
+
+const apiRoutes = ["addmap"];
+apiRoutes.forEach(name => {
+  const route = require(`./routes/api/${name}`);
+  application.use("/api", route);
+});
 
 // other middlewares
 application.use(express.static("public"));
