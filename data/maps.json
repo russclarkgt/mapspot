@@ -1,8 +1,14 @@
 {
-  "Example Map": {
-    "url": "mapbox://styles/username/id",
-    "date": 1596349754210,
-    "approved": false,
-    "active": false
+  "Mapbox Light": {
+    "url": "mapbox://styles/mapbox/light-v8",
+    "date": 1596402315491,
+    "approved": true,
+    "active": true
+  },
+  "Mapbox Dark": {
+    "url": "mapbox://styles/mapbox/dark-v8",
+    "date": 1596402328110,
+    "approved": true,
+    "active": true
   }
 }

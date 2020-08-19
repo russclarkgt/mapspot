@@ -1,3 +1,4 @@
+const fs = require("fs");
 const express = require("express");
 const application = express();
 
@@ -5,10 +6,12 @@ const application = express();
 const pageRoutes = require("./routes/pages");
 application.use("/", pageRoutes);
 
-const apiRoutes = ["addmap"];
-apiRoutes.forEach(name => {
-  const route = require(`./routes/api/${name}`);
-  application.use("/api", route);
+fs.readdir("routes/api", (err, files) => {
+  files.forEach(filename => {
+    const name = filename.split(".")[0];
+    const route = require(`./routes/api/${name}`);
+    application.use("/api", route);
+  });
 });
 
 // other middlewares
