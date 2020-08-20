@@ -1,13 +1,19 @@
 {
-  "Mapbox Light": {
-    "url": "mapbox://styles/mapbox/light-v8",
+  "Default Light": {
+    "url": "mapbox://styles/atlmaproom/ckdi6vs6x0ard1io2f6soi57w",
     "date": 1596402315491,
     "approved": true,
     "active": true
   },
-  "Mapbox Dark": {
-    "url": "mapbox://styles/mapbox/dark-v8",
+  "Default Dark": {
+    "url": "mapbox://styles/atlmaproom/ckdi6o91m0alt1iqt7vkh1pao",
     "date": 1596402328110,
+    "approved": true,
+    "active": true
+  },
+  "Default Streets": {
+    "url": "mapbox://styles/atlmaproom/ckdi70zas0axs1inpb02a7esf",
+    "date": 1596498046749,
     "approved": true,
     "active": true
   }

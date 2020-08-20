@@ -16,16 +16,3 @@ export const addOptions = (id, items) => {
     document.getElementById(id).appendChild(option);
   }
 };
-
-/**
- * Updates application to reflect a new Mapbox theme.
- * 
- * @param {object} map Mapbox object being referenced.
- * @param {object} state Application's state variable.
- * @param {string} newStyle URL of the desired style.
- */
-export const setStyle = (map, state, newStyle) => {
-  state.prevStyle = state.style;
-  state.style = newStyle;
-  map.setStyle(newStyle);
-};
