@@ -36,7 +36,7 @@ map.on("load", () => {
       // set state & add mapnames to dropdown
       state.maps = await res.json();
       const mapnames = Object.keys(state.maps);
-      func.addOptions("maps", mapnames);
+      func.addDropdownOptions("maps", mapnames);
     });
 
   // geographic scale and zoom functionalities
@@ -44,6 +44,10 @@ map.on("load", () => {
   const zoom = new mapboxgl.NavigationControl();
   map.addControl(scale, "bottom-left");
   map.addControl(zoom, "bottom-left");
+});
+
+map.on("style.load", () => {
+  func.addFilters(map, "filters");
 });
 
 // ===================================
@@ -65,6 +69,12 @@ window.handleMap = (e) => {
   const style = state.maps[e.target.value];
   map.setStyle(style.url);
 }
+
+window.handleFilter = (e) => {
+  const filters = func.getCurrentFilters(map);
+  func.setFilterVisibility(map, filters, false);
+  func.setFilterVisibility(map, e.target.value, true);
+};
 
 window.handleLock = () => {
   // map interaction features
