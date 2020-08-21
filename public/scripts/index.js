@@ -44,6 +44,13 @@ map.on("load", () => {
   const zoom = new mapboxgl.NavigationControl();
   map.addControl(scale, "bottom-left");
   map.addControl(zoom, "bottom-left");
+
+  // location search functionality
+  map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    mapboxgl: mapboxgl,
+    marker: false
+  }));
 });
 
 map.on("style.load", () => {

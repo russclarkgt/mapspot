@@ -50,25 +50,7 @@ div.dropdown {
   right: 0; left: 0;
 }
 
-.dropdown {
-  width: 250px;
-}
-.dropdown:before,
-.dropdown:after {
-  position: absolute;
-  top: 9px; right: 10px;
-
-  content: "";
-  border: 4px dashed;
-  border-color: #666 transparent;
-}
-.dropdown:after {
-  border-bottom: none;
-  margin-top: 7px;
-}
-.dropdown:before {
-  border-top: none;
-}
+.dropdown { width: 250px; }
 
 .dropdown-select {
   box-shadow: 0px 0px 20px #00000033;
@@ -88,6 +70,7 @@ div.dropdown {
 
 #map-pos    { top: 20px; }
 #filter-pos { top: 55px; }
+#filters { display: none; }
 
 
 /* ========================= */
@@ -99,6 +82,11 @@ div.dropdown {
   top: 0; bottom: 0;
   min-width: 100%;
   z-index: -1;
+}
+
+.mapboxgl-ctrl-top-right > div {
+  margin: 20px 20px 0px 0px !important;
+  box-shadow: 0px 0px 20px #00000033;
 }
 
 body {
