@@ -11,9 +11,21 @@
     "approved": true,
     "active": true
   },
-  "Default Streets": {
-    "url": "mapbox://styles/atlmaproom/ckdi70zas0axs1inpb02a7esf",
+  "Default Satellite": {
+    "url": "mapbox://styles/atlmaproom/cke4tih9507m519lg4nck4vnv",
     "date": 1596498046749,
+    "approved": true,
+    "active": true
+  },
+  "Sea Level Sensors": {
+    "url": "mapbox://styles/atlmaproom/ckf2uqxqy02mj1aoxx4267lfm",
+    "date": 1600107543435,
+    "approved": true,
+    "active": true
+  },
+  "Inundation Levels": {
+    "url": "mapbox://styles/atlmaproom/ckf2wf2aw04841apcc87i9es1",
+    "date": 1600110015402,
     "approved": true,
     "active": true
   }

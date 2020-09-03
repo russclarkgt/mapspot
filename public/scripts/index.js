@@ -11,16 +11,16 @@ const state = {
 // ==========================
 
 // associates api requests w/ mapbox account
-mapboxgl.accessToken = "pk.eyJ1IjoiYXRsYW50YS"
-  + "1tYXByb29tIiwiYSI6ImNrYmU2NXNyNjBpb2MyeG"
-  + "81eWx0cWs4dm8ifQ.y8Pw9ScBzl9eI9IyKCem7A";
+mapboxgl.accessToken = "pk.eyJ1IjoiYXRsbWFwcm9"
+  + "vbSIsImEiOiJjamtiZzJ6dGIybTBkM3dwYXQ2c3lr"
+  + "MWs3In0.tJzsvakNHTk7G4iu73aP7g";
 
 // creates and renders map in index.html
 const map = new mapboxgl.Map({
   container: "map",
-  style: "mapbox://styles/mapbox/satellite-v9",
-  center: [-84.3924, 33.7488],
-  zoom: 12
+  style: "mapbox://styles/atlmaproom/ckdi6o91m0alt1iqt7vkh1pao",
+  center: [-81.020, 31.975],
+  zoom: 10
 });
 
 map.on("load", () => {
