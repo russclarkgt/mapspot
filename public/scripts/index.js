@@ -26,7 +26,7 @@ const map = new mapboxgl.Map({
 map.on("load", () => {
   map.getCanvas().focus();
 
-  // getmaps post request
+  // retrieves data for active maps
   fetch("/api/getmaps", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
