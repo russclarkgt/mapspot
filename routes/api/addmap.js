@@ -21,7 +21,7 @@ router.post("/addmap", parser.json(), (req, res) => {
   // checks for input-related errors
   if (!mapname || !styleurl || !password) {
     reject("Please fill out all required information.");
-  } else if (password !== process.env.password) {
+  } else if (password !== process.env.upload_password) {
     reject("Password is incorrect. Try again.");
   } else if (data[mapname]) {
     reject(`"${mapname}" has already been uploaded.`);
