@@ -55,6 +55,31 @@ map.on("load", () => {
 
 map.on("style.load", () => {
   func.addFilters(map, "filters");
+
+  func.getCurrentFilters(map).forEach(filter => {
+    map.on("click", filter.id, e => {
+      // extract dataset properties from mapbox
+      const properties = e.features[0].properties;
+      let addedHtml = "";
+
+      // add relevant information to popup text
+      for (let [key, val] of Object.entries(properties)) {
+        key = key.toLowerCase().replace(/[\W_]+/g, " ");
+        val = (typeof val === "string") ? val.toLowerCase() : func.isDate(val);
+        addedHtml += `<tr><td class="key">${key}` + `</td><td class="val">${val}</td></tr>`;
+      }
+
+      // create new popup
+      new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML(`<table>${addedHtml}</table>`)
+        .addTo(map);
+    });
+
+    // style cursor upon entering and exiting layer
+    map.on("mouseenter", filter.id, () => map.getCanvas().style.cursor = "pointer");
+    map.on("mouseleave", filter.id, () => map.getCanvas().style.cursor = "");
+  });
 });
 
 // ===================================

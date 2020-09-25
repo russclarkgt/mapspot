@@ -74,6 +74,57 @@ div.dropdown {
 #filters { display: none; }
 
 
+/* =========================== */
+/*      MAPBOX COMPONENTS      */
+/* =========================== */
+
+.mapboxgl-ctrl-top-right > div {
+  margin: 20px 20px 0px 0px !important;
+  box-shadow: 0px 0px 20px #00000033;
+}
+
+.mapboxgl-popup {
+  max-width: 300px !important;
+  text-transform: capitalize !important;
+}
+
+.mapboxgl-popup-content {
+  border-radius: 10px;
+  font-size: 11px;
+  padding: 8px;
+}
+.mapboxgl-popup-content div {
+  padding: 20px 15px;
+  border-radius: 5px;
+  font-size: 13px;
+  color: #333333;
+  margin: 0;
+}
+.mapboxgl-popup-content .key {
+  white-space: nowrap;
+  text-align: right;
+  font-weight: bold;
+  color: #333333;
+}
+.mapboxgl-popup-content .val {
+  color: #777777;
+}
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+table {
+  border-spacing: 0px 5px;
+}
+td {
+  padding: 0px 10px;
+}
+td:nth-child(1) {
+  border-right: 2px solid;
+  border-color: #d3d3d3;
+}
+
+
 /* ========================= */
 /*      GENERAL STYLING      */
 /* ========================= */
@@ -83,11 +134,6 @@ div.dropdown {
   top: 0; bottom: 0;
   min-width: 100%;
   z-index: -1;
-}
-
-.mapboxgl-ctrl-top-right > div {
-  margin: 20px 20px 0px 0px !important;
-  box-shadow: 0px 0px 20px #00000033;
 }
 
 :focus {

@@ -76,3 +76,15 @@ export const addFilters = (map, id) => {
   else if (dropdown.options.length > 1)
     dropdown.style.display = "block";
 }
+
+/**
+ * Determines whether a given number is representative of a date
+ * between January 1st, 2000 and January 1st, 2030.
+ * 
+ * @param {number} unix Value passed-in from dataset.
+ * @returns {date|number} Corresponding date or original number.
+ */
+export const isDate = (unix) => {
+  return (unix > 946702800000 && unix < 1893474000000) ?
+    new Date(unix).toLocaleString() : unix;
+}
