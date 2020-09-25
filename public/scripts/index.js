@@ -79,8 +79,15 @@ window.handleMap = (e) => {
 
 window.handleFilter = (e) => {
   const filters = func.getCurrentFilters(map);
+
+  // retrieves list of selected dropdown options
+  const options = document.getElementById("filters").options;
+  const active = Array.prototype.filter.call(options,
+    option => option.selected).map(layer => layer.text);
+
+  // display only selected options
   func.setFilterVisibility(map, filters, false);
-  func.setFilterVisibility(map, e.target.value, true);
+  func.setFilterVisibility(map, active, true);
 };
 
 window.handleLock = () => {
