@@ -8,7 +8,7 @@ require("dotenv").config();
 
 router.post("/addmap", parser.json(), (req, res) => {
   // form data passed through request body
-  const { mapname, styleurl, password } = req.body;
+  const { mapname, styleurl, token } = req.body;
 
   // helper response functions
   const accept = (msg) => res.status(200).send(msg);
@@ -19,17 +19,16 @@ router.post("/addmap", parser.json(), (req, res) => {
   const data = JSON.parse(file);
 
   // checks for input-related errors
-  if (!mapname || !styleurl || !password) {
+  if (!mapname || !styleurl || !token) {
     reject("Please fill out all required information.");
-  } else if (password !== process.env.upload_password) {
-    reject("Password is incorrect. Try again.");
   } else if (data[mapname]) {
     reject(`"${mapname}" has already been uploaded.`);
   } else {
     // append new data
     data[mapname] = {
       url: styleurl,
-      date: Date.now(),
+      token: token,
+      date: new Date().toUTCString(),
       approved: false,
       active: false
     };

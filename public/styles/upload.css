@@ -114,5 +114,5 @@ button:hover {
 }
 
 .form-group > span:not(:first-child), .form-group .form-field:not(:first-child) { margin-left: -1px; }
-.form-group > span:first-child, .form-group .form-field:first-child { border-radius: 6px 0 0 6px; }
+.form-group > span:first-child, .form-group .form-field:first-child { border-radius: 6px 0 0 6px; width: 75px; }
 .form-group > span:last-child, .form-group .form-field:last-child { border-radius: 0 6px 6px 0; }

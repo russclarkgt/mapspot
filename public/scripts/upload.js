@@ -1,5 +1,5 @@
 // form state & html elements
-let mapname = styleurl = password = null;
+let mapname = styleurl = token = null;
 const form = document.getElementsByTagName("form")[0];
 const button = document.getElementsByTagName("button")[0];
 const message = document.getElementsByTagName("p")[0];
@@ -7,7 +7,7 @@ const message = document.getElementsByTagName("p")[0];
 // mutator functions used by form to update state
 function handleUrl(e) { styleurl = e.target.value }
 function handleName(e) { mapname = e.target.value }
-function handlePassword(e) { password = e.target.value }
+function handleToken(e) { token = e.target.value }
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -23,7 +23,7 @@ form.addEventListener("submit", async (e) => {
   fetch("/api/addmap", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mapname, styleurl, password })
+    body: JSON.stringify({ mapname, styleurl, token })
   })
     .then(async response => {
       // configures helper text beneath submit button
@@ -33,7 +33,7 @@ form.addEventListener("submit", async (e) => {
 
       // resets form state on successful upload
       if (response.status === 200) {
-        mapname = styleurl = password = null;
+        mapname = styleurl = token = null;
         form.reset();
       }
     });

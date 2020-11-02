@@ -99,6 +99,7 @@ window.handleMovement = (x, y) => {
 window.handleMap = (e) => {
   // update displayed style
   const style = state.maps[e.target.value];
+  mapboxgl.accessToken = style.token
   map.setStyle(style.url);
 }
 
