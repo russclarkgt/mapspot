@@ -1,5 +1,6 @@
 let data = password = table = null;
 const editable = ["approved", "active"];
+const blacklist = ["token"];
 
 // necessary html elements
 const form = document.querySelector("form");
@@ -29,9 +30,12 @@ const generateTable = () => {
 
   // creates header for each map property
   props.forEach(prop => {
-    let th = document.createElement("th");
-    th.innerHTML = prop.toUpperCase();
-    row.appendChild(th);
+    console.log(prop);
+    if (!blacklist.includes(prop)) {
+      let th = document.createElement("th");
+      th.innerHTML = prop.toUpperCase();
+      row.appendChild(th);
+    }
   });
 };
 
@@ -43,16 +47,16 @@ const populateTable = () => {
 
     // iteratively add remaining props
     for (prop in info) {
-      if (!editable.includes(prop)) {
-        // insert text content if not editable
-        row.insertCell().innerHTML = info[prop];
-      } else {
-        // otherwise insert checkboxes w/ current value
+      if (editable.includes(prop)) {
+        // insert checkboxes w/ current value
         let box = document.createElement("input");
         box.className = prop;
         box.type = "checkbox";
         box.checked = info[prop];
         row.insertCell().appendChild(box);
+      } else if (!blacklist.includes(prop)) {
+        // insert text content if not editable
+        row.insertCell().innerHTML = info[prop];
       }
     }
   }
