@@ -6,7 +6,8 @@ const router = express.Router();
 const routes = {
   "index.html": "/",
   "upload.html": "/upload",
-  "update.html": "/update"
+  "update.html": "/update",
+  "help.html": "/help"
 };
 
 // delivers html files to client
