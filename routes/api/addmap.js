@@ -8,35 +8,24 @@ require("dotenv").config();
 
 router.post("/addmap", parser.json(), (req, res) => {
   // form data passed through request body
-  const { mapname, styleurl, token } = req.body;
-
-  // helper response functions
-  const accept = (msg) => res.status(200).send(msg);
-  const reject = (err) => res.status(400).send(err);
+  const { mapname, path, ...args } = req.body;
 
   // load previously-uploaded data
-  const file = fs.readFileSync("data/maps.json", "utf-8");
+  const file = fs.readFileSync(path, "utf-8");
   const data = JSON.parse(file);
 
-  // checks for input-related errors
-  if (!mapname || !styleurl || !token) {
-    reject("Please fill out all required information.");
+  // check for input-related errors
+  if (Object.values(req.body).some(a => a === null || a === "")) {
+    res.status(400).send("Please fill out all required information.");
   } else if (data[mapname]) {
-    reject(`"${mapname}" has already been uploaded.`);
+    res.status(400).send(`"${mapname}" has already been uploaded.`);
   } else {
     // append new data
-    data[mapname] = {
-      url: styleurl,
-      token: token,
-      date: new Date().toUTCString(),
-      approved: false,
-      active: false
-    };
-
+    data[mapname] = args;
     // apply formatting & overwrite existing json
     let appended = JSON.stringify(data, null, 2);
-    fs.writeFile("data/maps.json", appended, () => {});
-    accept("Your map is pending approval.");
+    fs.writeFile(path, appended, () => {});
+    res.status(200).send("Your map is pending approval.");
   }
 });
 

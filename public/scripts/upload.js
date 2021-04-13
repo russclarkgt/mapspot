@@ -1,16 +1,29 @@
-// form state & html elements
-let mapname = styleurl = token = null;
-const form = document.getElementsByTagName("form")[0];
-const button = document.getElementsByTagName("button")[0];
-const message = document.getElementsByTagName("p")[0];
+// user input & other request information
+const requestBodies = [
+  { // mapbox map data format
+    path: "data/mapbox.json",
+    mapname: null, url: null, token: null,
+    date: new Date().toUTCString(),
+    approved: false, active: false
+  },
+  { // historical map data format
+    path: "data/historical.json",
+    mapname: null, url: null,
+    date: new Date().toUTCString()
+  }
+];
 
 // mutator functions used by form to update state
-function handleUrl(e) { styleurl = e.target.value }
-function handleName(e) { mapname = e.target.value }
-function handleToken(e) { token = e.target.value }
+function handleMapboxName(e) { requestBodies[0]["mapname"] = e.target.value }
+function handleMapboxUrl(e) { requestBodies[0]["url"] = e.target.value }
+function handleMapboxToken(e) { requestBodies[0]["token"] = e.target.value }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+function handleHistoricalName(e) { requestBodies[1]["mapname"] = e.target.value }
+function handleHistoricalUrl(e) { requestBodies[1]["url"] = e.target.value }
+
+// generalized submit handler applied to all types of map uploads
+const subHandler = async (event, form, button, message, body) => {
+  event.preventDefault();
 
   // temporarily disable submissions
   button.innerHTML = "Processing";
@@ -23,7 +36,7 @@ form.addEventListener("submit", async (e) => {
   fetch("/api/addmap", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mapname, styleurl, token })
+    body: JSON.stringify(body)
   })
     .then(async response => {
       // configures helper text beneath submit button
@@ -41,4 +54,17 @@ form.addEventListener("submit", async (e) => {
   // re-enable submissions
   button.disabled = false;
   button.innerHTML = "Submit";
+};
+
+// 
+requestBodies.forEach((body, i) => {
+  // retrieve elements associated with each upload
+  const form = document.getElementsByTagName("form")[i];
+  const button = document.getElementsByTagName("button")[i];
+  const message = document.getElementsByTagName("p")[i];
+
+  // add 
+  form.addEventListener("submit", async (event) =>
+    subHandler(event, form, button, message, body)
+  );
 });

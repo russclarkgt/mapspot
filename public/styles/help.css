@@ -66,7 +66,7 @@ a {
   transition: all ease 0.33s;
   text-decoration: none;
   font-weight: 700;
-  color: #ff8989;
+  color: #ffffff;
 }
 a:hover {
   filter: brightness(80%);

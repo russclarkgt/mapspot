@@ -10,7 +10,7 @@ router.post("/updatemaps", parser.json(), (req, res) => {
   const { updates, password } = req.body;
 
   // load previously-uploaded maps
-  const file = fs.readFileSync("data/maps.json", "utf-8");
+  const file = fs.readFileSync("data/mapbox.json", "utf-8");
   const data = JSON.parse(file);
 
   if (password == process.env.update_password) {
@@ -22,7 +22,7 @@ router.post("/updatemaps", parser.json(), (req, res) => {
 
     // apply formatting & overwrite existing json
     let newdata = JSON.stringify(data, null, 2);
-    fs.writeFile("data/maps.json", newdata, () => { });
+    fs.writeFile("data/mapbox.json", newdata, () => { });
     res.status(200).send("Maps have been updated!");
   } else {
     res.status(400).send("Password is incorrect. Try again.");
