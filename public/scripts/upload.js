@@ -43,12 +43,6 @@ const subHandler = async (event, form, button, message, body) => {
       message.innerHTML = await response.text();
       message.style.color = response.status === 200
         ? "#80cba0" : "#e77e7e";
-
-      // resets form state on successful upload
-      if (response.status === 200) {
-        mapname = styleurl = token = null;
-        form.reset();
-      }
     });
 
   // re-enable submissions
