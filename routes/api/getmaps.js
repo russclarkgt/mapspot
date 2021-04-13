@@ -14,7 +14,7 @@ const hasProps = (obj, props) => {
 
 router.post("/getmaps", parser.json(), (req, res) => {
   // load previously-uploaded maps
-  const file = fs.readFileSync("data/mapbox.json", "utf-8");
+  const file = fs.readFileSync(req.query.path, "utf-8");
   const maps = JSON.parse(file);
 
   // remove maps not matching specified criteria

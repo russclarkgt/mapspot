@@ -8,7 +8,7 @@ const button = document.querySelector("button");
 const message = document.querySelector("p");
 
 // retrieves data for all maps
-fetch("/api/getmaps", {
+fetch("/api/getmaps?path=data/mapbox.json", {
   method: "POST",
   headers: { "Content-Type": "application/json" }
 })
@@ -30,7 +30,6 @@ const generateTable = () => {
 
   // creates header for each map property
   props.forEach(prop => {
-    console.log(prop);
     if (!blacklist.includes(prop)) {
       let th = document.createElement("th");
       th.innerHTML = prop.toUpperCase();

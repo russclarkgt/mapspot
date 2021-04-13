@@ -2,7 +2,8 @@ import * as func from "./utils/helpers.js";
 
 // application state
 const state = {
-  maps: null,
+  mapbox: null,
+  historical: null,
   locked: false
 };
 
@@ -23,21 +24,27 @@ const map = new mapboxgl.Map({
   zoom: 10
 });
 
-map.on("load", () => {
+map.on("load", async () => {
   map.getCanvas().focus();
 
-  // retrieves data for active maps
-  fetch("/api/getmaps", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ active: true })
-  })
-    .then(async res => {
-      // set state & add mapnames to dropdown
-      state.maps = await res.json();
-      const mapnames = Object.keys(state.maps);
-      func.addDropdownOptions("maps", mapnames);
-    });
+  const filtering = [
+    ["mapbox", { active: true }],
+    ["historical", {}]
+  ];
+  filtering.forEach(info =>
+    // retrieves data associated with type of map specified
+    fetch(`api/getmaps?path=data/${info[0]}.json`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(info[1])
+    })
+      .then(async res => {
+        // set state & add mapnames to dropdown
+        state[info[0]] = await res.json();
+        const mapnames = Object.keys(state[info[0]]);
+        func.addDropdownOptions(info[0], mapnames);
+      })
+  );
 
   // geographic scale and zoom functionalities
   const scale = new mapboxgl.ScaleControl({ unit: "imperial" });
@@ -54,9 +61,10 @@ map.on("load", () => {
 });
 
 map.on("style.load", () => {
-  func.addFilters(map, "filters");
+  func.addHistoricalLayers(map, state);
+  func.addFilters(map, "filters", state.historical);
 
-  func.getCurrentFilters(map).forEach(filter => {
+  func.getCurrentFilters(map, state.historical).forEach(filter => {
     map.on("click", filter.id, e => {
       // extract dataset properties from mapbox
       const properties = e.features[0].properties;
@@ -80,6 +88,9 @@ map.on("style.load", () => {
     map.on("mouseenter", filter.id, () => map.getCanvas().style.cursor = "pointer");
     map.on("mouseleave", filter.id, () => map.getCanvas().style.cursor = "");
   });
+
+  // hide all historical maps every time the style is changed
+  func.setFilterVisibility(map, Object.keys(state.historical), false);
 });
 
 // ===================================
@@ -98,13 +109,13 @@ window.handleMovement = (x, y) => {
 
 window.handleMap = (e) => {
   // update displayed style
-  const style = state.maps[e.target.value];
+  const style = state.mapbox[e.target.value];
   mapboxgl.accessToken = style.token
   map.setStyle(style.url);
 }
 
 window.handleFilter = (e) => {
-  const filters = func.getCurrentFilters(map);
+  const filters = func.getCurrentFilters(map, state.historical);
 
   // retrieves list of selected dropdown options
   const options = document.getElementById("filters").options;

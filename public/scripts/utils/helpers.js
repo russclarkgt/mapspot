@@ -20,13 +20,18 @@ export const addDropdownOptions = (id, items) => {
 /**
  * Filters through and extracts map's custom data layers.
  * Returns only layers with no metadata (i.e. not mapbox
- * defaults) that are not in the blacklist.
+ * defaults) that are not in the blacklist. Historical
+ * maps are also excluded from the returned array unless
+ * specified otherwise.
  * 
  * @param {object} map Application's current map.
+ * @param {object} historical Historical map JSON data.
  * @returns {object[]} Custom-made data layers.
  */
-export const getCurrentFilters = (map) => {
+export const getCurrentFilters = (map, historical) => {
   const blacklist = ["background", "satellite"];
+  if (map.getStyle().name !== "Mapbox Outdoors") // todo; fix this
+    Object.keys(historical).forEach(name => blacklist.push(name));
   return map.getStyle().layers.filter(layer =>
     !layer["metadata"] && !blacklist.includes(layer.id));
 };
@@ -57,16 +62,17 @@ export const setFilterVisibility = (map, filters, bool) => {
  *  - Hides dropdown for styles w/o custom layers. 
  * 
  * @param {object} map Application's current map.
+ * @param {object} historical Historical map JSON data.
  * @param {string} id HTML id of the dropdown menu.
  */
-export const addFilters = (map, id) => {
+export const addFilters = (map, id, historical) => {
   // remove existing dropdown filters
   const dropdown = document.getElementById(id);
   dropdown.options.length = 1;
   dropdown.selectedIndex = 0;
 
   // add filters and disable visibility
-  const filters = getCurrentFilters(map);
+  const filters = getCurrentFilters(map, historical);
   addDropdownOptions(id, filters.map(obj => obj.id));
   setFilterVisibility(map, filters, false);
 
@@ -76,6 +82,35 @@ export const addFilters = (map, id) => {
   else if (dropdown.options.length > 1)
     dropdown.style.display = "block";
 }
+
+/**
+ * Creates new MapBox layer for each historical map stored
+ * in the local database, historical.json.
+ * 
+ * @param {object} map Application's current map.
+ * @param {object} state Object storing historical map info.
+ */
+ export const addHistoricalLayers = (map, state) => {
+  Object.keys(state.historical).forEach(key => {
+    const sections = state.historical[key].url.split("/");
+    const identifier = sections[sections.length - 1];
+    map.addLayer({
+      'id': `${key}`,
+      'type': 'raster',
+      'source': {
+        'type': 'raster',
+        'tiles': [
+          `https://geoserver.ecds.emory.edu/ATLMaps/` +
+          `wms?bbox={bbox-epsg-3857}&format=image/png` +
+          `&service=WMS&version=1.1.0&request=GetMap` +
+          `&srs=EPSG:3857&transparent=true&width=256` +
+          `&height=256&layers=ATLMaps:${identifier}`
+        ],
+        'tileSize': 256
+      }
+    });
+  });
+};
 
 /**
  * Determines whether a given number is representative of a date
