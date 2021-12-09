@@ -1,0 +1,18 @@
+
+MapSpot Software
+
+
+Prerequisites:
+
+Install Node.js
+
+Install Express Library
+https://expressjs.com/en/starter/installing.html
+
+
+To run:
+node app.js
+
+
+In your browser, go to http://127.0.0.1:8081/
+
